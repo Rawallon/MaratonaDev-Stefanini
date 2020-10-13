@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="listaDeTarefasApp" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maratona Stefanini Dia 2</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        .tarefa-true{
+            text-decoration: line-through;
+            color: grey;
+        }
+    </style>
+</head>
+
+<body style="background: #6c757d;">
+
+    <div class="mx-auto mt-5 jumbotron" style="width: 500px;">
+        <h2 class="font-weight-bold">Lista de Tarefas</h2>
+        <div ng-controller="listaDeTarefasController as vm">
+            <div class="mb-2">Restam {{vm.restam()}} de {{vm.tarefas.length}}
+                [ <a href="" ng-click="vm.apagar()">Apagar</a> ]
+            </div>
+            <ul class="unstyled">
+                <li ng-repeat="tarefa in vm.tarefas" style="list-style: none;">
+                  <label class="checkbox">
+                    <input type="checkbox" ng-model="tarefa.feito">
+                    <span class="tarefa-{{tarefa.feito}}">{{tarefa.texto}}</span>
+                  </label>
+                </li>
+              </ul>
+              <form ng-submit="vm.addTarefa()">
+                <input type="text" ng-model="vm.titulotarefa"  size="30"
+                       placeholder="Titulo da tarefa">
+                <input class="btn-primary" type="submit" value="Adicionar">
+              </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
