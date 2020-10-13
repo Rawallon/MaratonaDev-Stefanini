@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR" ng-app="listaComprasApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras App</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css">
+    <link rel="stylesheet" href="lista-compras.css">
+    <script src="http://localhost:35729/livereload.js"></script>
+
+    <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular-route/angular-route.js"></script>
+
+    <script src="lista-compras.module.js"></script>
+    <script src="lista-compras.routes.js"></script>
+    <script src="lista-compras.service.js"></script>
+
+    <script src="utilities/constantes.js"></script>
+    <script src="utilities/filtros.js"></script>
+    <script src="utilities/helper.factory.js"></script>
+
+    <script src="header.controller.js"></script>
+    <script src="acesso/acesso.controller.js"></script>
+
+    <script src="itens/itens.service.js"></script>
+    <script src="itens/itens.controller.js"></script>
+
+    <script src="categorias/categorias.service.js"></script>
+    <script src="categorias/categorias.controller.js"></script>
+</head>
+
+<body>
+
+    <header ng-include="'./header.tpl.html'"></header>
+
+    <ng-view></ng-view>
+</body>
+
+</html>
