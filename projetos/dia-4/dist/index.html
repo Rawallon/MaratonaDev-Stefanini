@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="listaComprasApp" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maratona Stefanini Dia 3</title>
+    <script src="http://localhost:35729/livereload.js"></script>
+
+    <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular-route/angular-route.js"></script>
+
+
+    <script src="lista-compras.module.js"></script>
+    <script src="lista-compras.routes.js"></script>
+
+    <script src="header.controller.js"></script>
+    <script src="acesso/acesso.controller.js"></script>
+    <script src="lista-compras.service.js"></script>
+    <script src="utilities/constantes.js"></script>
+    <script src="utilities/helper.factory.js"></script>
+
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css"
+        integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
+</head>
+<style>
+    .c-pointer {
+
+        cursor: pointer;
+    }
+</style>
+
+<body >
+    <header ng-include="'./header.tpl.html'"></header>
+
+    <!-- alertas -->
+    <div id="alertas" class="container" ng-show="listaMensagens.length">
+        <div ng-repeat="msg in listaMensagens" class="alert alert-{{msg.tipo}}">
+            {{msg.text}} {{msg.acao}}
+            <button type="button" class="close" aria-label="Close" ng-click="listaMensagens.splice($index, 1)">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <ng-view></ng-view>
+   
+</body>
+
+</html>
