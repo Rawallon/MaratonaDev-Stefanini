@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maratona Stefanini Dia 1 </title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body style="background: #6c757d;">
+    <!-- <div ng-controller="controlador">
+        <h1>Utilização de <i>model</i> e <i>bind</i></h1>
+        <input type="text" ng-model="nome" placeholder="Digite algo aqui..."><br />
+        <h3>{{nome}}</h3>
+        <h3 ng-bind="nome "></h3>
+    </div>
+
+    <div ng-controller="contador">
+        <h1>Utilização de <i>controler</i> e manipulação através de <i>diretivas</i></h1>
+        <h2>{{numero}}</h2>
+        <button ng-click="numero = numero + 1;">Adicionar</button>
+        <button ng-click="numero = numero - 1;">Subtrair</button>
+    </div> -->
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col  text-center">
+                <div ng-controller="controlador">
+                    <div class="card" >
+                        <div class="card-body">
+                          <h2 class="card-title mb-4">Utilização de <i>model</i> e <i>bind</i></h2>
+                          <h6 class="card-subtitle mb-2 text-muted">Digite seu texto: <input type="text" ng-model="nome" placeholder="Digite algo aqui..."></h6>
+                          <h3 class="card-text">{{nome}}</h3>
+                          <h3 class="card-text" ng-bind="nome "></h3>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col text-center" >
+                <div ng-controller="contador">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Utilização de <i>controler</i> e manipulação através de
+                                <i>diretivas</i></h2>
+                            <h6 class="card-subtitle mb-2 text-muted"> </h6>
+                            <h1 class="card-text">{{numero}}</h1>
+                            <button class="btn btn-dark mr-5" ng-click="numero = numero + 1;">Adicionar</button>
+                            <button class="btn btn-dark" ng-click="numero = numero - 1;">Subtrair</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
