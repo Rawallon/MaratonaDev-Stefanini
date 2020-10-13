@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html ng-app="listaTarefaApp" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maratona Stefanini Dia 3</title>
+    <script src="vendor/angular/angular.js"></script>
+    <script src="lista-compras.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css"
+        integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
+</head>
+<style>
+    .c-pointer {
+        cursor: pointer;
+    }
+</style>
+
+<body ng-controller="ListaTarefaController as vm">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2 px-5 mb-3">
+        <i class="material-icons md-36 mr-1">shopping_cart</i>
+        <a class="navbar-brand">ListaCompras Web</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Ativar navegação">
+            <span class="navbar-toggle-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link c-pointer" ng-class="{'active': vm.logado}">home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-0">
+                <li class="nav-item" ng-show="vm.logado">
+                    <a class="nav-link c-pointer" ng-click="vm.logado = false; vm.validar = false;">logout</a>
+                </li>
+                <li class="nav-item" ng-show="!vm.logado">
+                    <a class="nav-link c-pointer" ng-click="vm.register = false; vm.validar = false;"
+                        ng-class="{'active': !vm.logado && !vm.register}">login</a>
+                </li>
+                <li class="nav-item" ng-show="!vm.logado">
+                    <a class="nav-link c-pointer" ng-click="vm.register = true; vm.validar = false;"
+                        ng-class="{'active': vm.register}">register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- alertas -->
+    <div id="alertas" class="container" ng-show="listaMensagens.length">
+        <div ng-repeat="msg in listaMensagens" class="alert alert-{{msg.tipo}}">
+            {{msg.text}}
+            <button type="button" class="close" aria-label="Close" ng-click="listaMensagens.splice($index, 1)">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- HOME -->
+    <div class="container" ng-if="vm.logado">
+        <h1>HOME</h1>
+        <p>
+            Bem-Vindo
+            <strong class="text-info">NOME</strong>
+            ao melhor App de Lista de Compras
+        </p>
+    </div>
+
+    <!-- login -->
+    <div ng-if="!vm.logado && !vm.register" class="row justify-content-center align-items-center login-row">
+        <div class="col">
+            <div class="mx-auto py-5 mt-5 jumbotron" style="width: 600px;">
+                <h3 class="text-center text-uppercase">Login</h3>
+                <form name="vm.loginForm" ng-submit="vm.logado = true">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" ng-model="vm.login.username"
+                            ng-required="true" placeholder="Username">
+                        <small ng-show="vm.loginForm.username.$error.required && vm.validar" class="form-text text-danger">Campo
+                            Obrigatório</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" class="form-control" name="password" ng-model="vm.login.password"
+                            ng-required="true" placeholder="Senha">
+                        <small ng-show="vm.loginForm.password.$error.required && vm.validar" class="form-text text-danger">Campo
+                            Obrigatório</small>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-primary mb-1" type="submit" ng-click="vm.validar = true;">Login</button>
+                        <span>
+                            Não tem uma conta?
+                            <a class="text-info c-pointer ml-2" ng-click="vm.register = true; vm.validar = false;">
+                                Cadastrar
+                            </a>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- registro -->
+
+    <div ng-if="!vm.logado && vm.register" class="row justify-content-center align-items-center login-row">
+        <div class="col">
+            <div class="container mx-auto py-5 mt-5 jumbotron" style="width: 600px;">
+                <h3 class="text-center text-uppercase">Cadastrar</h3>
+                <form name="vm.cadForm" ng-submit="vm.logado = true;">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input class="form-control" type="text" name="nomeCompleto" ng-model="vm.user.nome"
+                            ng-required="true" placeholder="Nome completo">
+                        <small ng-show="vm.cadForm.nomeCompleto.$error.required && vm.validar"
+                            class="form-text text-danger">
+                            Campo obrigatório!
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input class="form-control" type="email" name="email" ng-model="vm.user.email"
+                            ng-required="true" placeholder="Endereço de e-mail">
+                        <small ng-show="vm.cadForm.email.$error.required && vm.validar" class="form-text text-danger">
+                            Campo obrigatório!
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" type="text" name="username" ng-model="vm.user.username"
+                            ng-required="true" placeholder="Username">
+                        <small ng-show="vm.cadForm.username.$error.required && vm.validar"
+                            class="form-text text-danger">
+                            Campo obrigatório!
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input class="form-control" type="password" name="password" ng-model="vm.user.password"
+                            ng-required="true" placeholder="Senha">
+                        <small ng-show="vm.cadForm.password.$error.required && vm.validar"
+                            class="form-text text-danger">
+                            Campo obrigatório!
+                        </small>
+                        <small
+                            ng-show="vm.user.password !== vm.user.password2 && (vm.user.password && vm.user.password2)"
+                            class="form-text text-danger">
+                            <span>As senha devem ser iguais!</span>
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirmar Senha</label>
+                        <input class="form-control" type="password" name="password2" ng-model="vm.user.password2"
+                            ng-required="true" placeholder="Senha">
+                        <small ng-show="vm.cadForm.password2.$error.required && vm.validar"
+                            class="form-text text-danger">
+                            <span>Campo obrigatório</span>
+                        </small>
+                        <small
+                            ng-show="vm.user.password !== vm.user.password2 && (vm.user.password && vm.user.password2)"
+                            class="form-text text-danger">
+                            <span>As senha devem ser iguais!</span>
+                        </small>
+                    </div>
+                    <button class="btn btn-primary mb-1" type="submit" ng-click="vm.validar = true;">
+                        Cadastrar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
